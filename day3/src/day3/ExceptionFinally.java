@@ -8,9 +8,11 @@ public static void main(String[] args) {
 		System.out.println("hello");
 	}
 	catch(Exception e) {
-		e.printStackTrace();
+		System.out.println(12/0);
+		System.out.println("jiii");
 	}
 	finally {
+//		System.out.println(12/0);
 		System.out.println("finally blovk");
 		// s: handle finally clause
 	}
