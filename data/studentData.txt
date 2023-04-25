@@ -1,0 +1,4 @@
+name:trapti
+gender:f
+age:12
+grade:r
