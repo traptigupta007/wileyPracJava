@@ -25,7 +25,7 @@ public class SetExample {
 		ls.add("hello");
 		ls.add("hii");
 		ls.add("welcome");
-		ls.add(null);
+//		ls.add(null);
 		System.out.println(ls);
 	}
 
