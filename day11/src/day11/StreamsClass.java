@@ -1,7 +1,9 @@
 package day11;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamsClass {
@@ -26,7 +28,12 @@ public class StreamsClass {
 		Stream<String> limitString = Stream.generate(()->"trapti").limit(5);
 		Stream<Integer> limitStringInt = Stream.generate(()->(int)Math.random()*100).limit(5);
 		List<Integer> list1 = Arrays.asList(1,4,5,6,6,6,7,7,7,6,55,4);
-		list1.stream().filter(x->x%2==0);
+		List<Integer> filteredData=list1.stream().filter(x->x%2==0).collect(Collectors.toList());
+		System.out.println(filteredData);
+		List<Integer> mappedList = filteredData.stream().map(n->n/2).collect(Collectors.toList());
+		System.out.println(mappedList);
+		List<Integer> filteredData1=list1.stream().filter(x->x%2==0).map(n->n/2).distinct().sorted((a,b)->(a-b)).limit(3).collect(Collectors.toList());
+		System.out.println(filteredData1);
 	}
 
 }
