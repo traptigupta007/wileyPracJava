@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;himanshu resume.pdf&apos; to &apos;jdbcapp/src/main/java/com.wiley.jdbcapp&apos;&#x0D;&#x0A;- Original project: &apos;jdbcapp&apos;&#x0D;&#x0A;- Destination element: &apos;jdbcapp/src/main/java/com.wiley.jdbcapp&apos;&#x0D;&#x0A;- Original element: &apos;himanshu resume.pdf&apos;" description="Copy file" destination="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.wiley.jdbcapp" element1="src/main/java/com/wiley/jdbcapp/himanshu resume.pdf" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1684907065642" units="0" version="1.0"/>
+</session>

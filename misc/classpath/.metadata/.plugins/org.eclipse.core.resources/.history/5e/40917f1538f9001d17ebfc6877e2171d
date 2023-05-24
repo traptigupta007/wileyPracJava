@@ -1,0 +1,93 @@
+package com.wiley.jdbcapp;
+import java.sql.*;
+import java.util.*;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+//    	try {
+//			String driver="com.mysql.cj.jdbc.Driver";
+//			String url="jdbc:mysql://localhost:8088/wileyjdbc";
+//			String username="root";
+//			String password="java";
+//			Class.forName(driver);
+//			Connection connection=DriverManager.getConnection(url,username,password);
+//			Statement stmt=connection.createStatement();
+//			String sql="Select first_name,last_name,email from candidates";
+//			ResultSet rs=stmt.executeQuery(sql);
+//			while(rs.next()) {
+//				System.out.println(rs.getString("first_name")+"\t"+rs.getString("last_name")+"\t"+rs.getString("email"));
+//			}
+//			
+//			try {
+//				rs.close();
+//				stmt.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//				// TODO: handle exception
+//			}
+//		} catch (Exception e) {
+//			
+//	e.printStackTrace();
+//			// TODO: handle exception
+//		}
+//           System.out.println( "Hello World!" );
+    	
+    	
+    	Scanner sc=new Scanner(System.in);
+    	EmployeeDao empCRUDOperations=new EmployeeDaoImpl();
+    	while(true) {
+    	System.out.println("~~~~EMPLOYEE MANAGEMENT~~~~");
+    	System.out.format("1. Add Employee \n 2. Show all Enployee \n 3. Show Employee Based On id \n 4. Update Employee By Id \n 5. Delete Enployee \n 6. Exit \n SELECT CHOICE(1-6)2: ");
+    	int ch=sc.nextInt();
+    	switch(ch) {
+    	case 1:
+    		System.out.println("Please enter your id:");
+    		try {
+    		int id=sc.nextInt();}
+    		catch(Exception e) {
+    			System.out.println("please enter only integer value");
+    			break;
+    		}
+    		System.out.println("Please enter your name:");
+    		String name=sc.next();
+    		System.out.println("Please enter your salary:");
+    		double salary=sc.nextDouble();
+    		System.out.println("Please enter your age:");
+    		int age=sc.nextInt();
+    		Employee emp=new Employee(id, name, salary, age);
+    		empCRUDOperations.createEmployee(emp);
+    		break;
+    	case 2:
+    		empCRUDOperations.getAllEmployees();
+    		break;
+    	case 3:
+    		System.out.println("Please enter your id:");
+    		id=sc.nextInt();
+    		empCRUDOperations.getEmpByiD(id);;
+    		break;
+    	case 4:
+    		System.out.println("Please enter your id:");
+    		id=sc.nextInt();
+    		System.out.println("Please enter updated name:");
+    		name=sc.next();
+    		empCRUDOperations.updateEmpNameById(id, name);
+    		break;
+    	case 5:
+    		System.out.println("Please enter your id:");
+    		id=sc.nextInt();
+    		empCRUDOperations.deleteEmpById(id);
+    		break;
+    	case 6:
+    		System.exit(0);
+    		break;
+    	default:
+    		System.out.println("Invalid choice");
+    	}
+    	}
+    }
+}

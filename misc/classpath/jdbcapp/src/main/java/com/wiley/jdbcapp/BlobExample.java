@@ -1,0 +1,83 @@
+package com.wiley.jdbcapp;
+
+
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.*;
+
+/**
+ *
+ * @author mysqltutorial.org
+ */
+public class BlobExample {
+
+    /**
+     * Update resume for a specific candidate
+     *
+     * @param candidateId
+     * @param filename
+     * @throws ClassNotFoundException 
+     * @throws IOException 
+     */
+    public static void writeBlob(int candidateId, String filename) throws ClassNotFoundException, IOException {
+        // update sql
+        String updateSQL = "UPDATE candidates "
+                + "SET resume = ? "
+                + "WHERE id=?";
+
+        Connection  connection=null;
+	
+   	 try {
+			String driver = "com.mysql.cj.jdbc.Driver";
+			String url = "jdbc:mysql://localhost:8088/d1";
+			String username = "root";
+			String password = "java";
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, username, password);
+            // read the file
+            File file = new File(filename);
+            FileInputStream input = new FileInputStream(file);
+            PreparedStatement pstmt = connection.prepareStatement(updateSQL);
+            // set parameters
+            pstmt.setBinaryStream(1, input);
+            pstmt.setInt(2, candidateId);
+
+            // store the resume file in database
+            System.out.println("Reading file " + file.getAbsolutePath());
+            System.out.println("Store file in the database.");
+            pstmt.executeUpdate();
+            String selectSQL = "SELECT resume FROM candidates WHERE id=?";
+            ResultSet rs = null;
+             pstmt = connection.prepareStatement(selectSQL);
+             pstmt.setInt(1, candidateId);
+             rs = pstmt.executeQuery();
+              file = new File("F:\\\\wileyPrac\\\\misc\\\\classpath\\\\jdbcapp\\\\src\\\\main\\\\java\\\\com\\\\wiley\\\\jdbcapp\\\\a.pdf");
+             FileOutputStream output = new FileOutputStream(file);
+
+             System.out.println("Writing to file " + file.getAbsolutePath());
+             while (rs.next()) {
+            	 InputStream input1 = rs.getBinaryStream("resume");
+                 byte[] buffer = new byte[1024];
+                 while (input1.read(buffer) > 0) {
+                     output.write(buffer);
+                 }
+             }
+        } catch (SQLException | FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     * @throws ClassNotFoundException 
+     * @throws IOException 
+     */
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+
+        writeBlob(1, "F:\\wileyPrac\\misc\\classpath\\jdbcapp\\src\\main\\java\\com\\wiley\\jdbcapp\\himanshu resume.pdf");
+
+    }
+
+}

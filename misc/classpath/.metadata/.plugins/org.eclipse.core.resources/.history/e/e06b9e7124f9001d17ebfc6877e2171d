@@ -1,0 +1,39 @@
+package com.wiley.jdbcapp;
+import java.sql.*;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	try {
+			String driver="com.mysql.cj.jdbc.Driver";
+			String url="jdbc:mysql://localhost:8088/jdbcEx";
+			String username="root";
+			String password="java";
+			Class.forName(driver);
+			Connection connection=DriverManager.getConnection(url,username,password);
+			Statement stmt=connection.createStatement();
+			String sql="Select firstname,lastname,email from candidates";
+			ResultSet rs=stmt.executeQuery(sql);
+			while(rs.next()) {
+				System.out.println(rs.getString("firstname")+"\t"+rs.getString("lastname")+"\t"+rs.getString("email"));
+			}
+			
+			try {
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+		} catch (Exception e) {
+			
+	e.printStackTrace();
+			// TODO: handle exception
+		}
+           System.out.println( "Hello World!" );
+    }
+}
