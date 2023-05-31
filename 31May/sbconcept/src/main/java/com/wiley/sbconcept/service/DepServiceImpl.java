@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wiley.sbconcept.model.Department;
 import com.wiley.sbconcept.repository.DepRepo;
@@ -13,9 +14,9 @@ public class DepServiceImpl implements DepService {
 	@Autowired
 	private DepRepo depRepo;
 	@Override
-	public Department createDepartment(Department dep) {
+	public Department createDepartment(@RequestBody Department dep) {
 		// TODO Auto-generated method stub
-		return null;
+		return depRepo.save(dep);
 	}
 
 	@Override
